@@ -37,6 +37,7 @@ from src.scraping.scrapers.hrmos import HrmosScraper
 from src.scraping.scrapers.icims import iCIMSScraper
 from src.scraping.scrapers.infojobs_es import InfoJobsSpainScraper
 from src.scraping.scrapers.jazzhr import JazzHRScraper
+from src.scraping.scrapers.jibe import JibeScraper
 from src.scraping.scrapers.jobbankca import JobBankCAScraper
 from src.scraping.scrapers.jobs_cz import JobsCzScraper
 from src.scraping.scrapers.jobsch import JobsChScraper
@@ -64,6 +65,7 @@ from src.scraping.scrapers.seek import SeekScraper
 from src.scraping.scrapers.smartrecruiters import SmartRecruitersScraper
 from src.scraping.scrapers.softgarden import SoftgardenScraper
 from src.scraping.scrapers.successfactors import SuccessFactorsScraper
+from src.scraping.scrapers.talentbrew import TalentBrewScraper
 from src.scraping.scrapers.taleo import TaleoScraper
 from src.scraping.scrapers.teamtailor import TeamtailorScraper
 from src.scraping.scrapers.tesla import TeslaScraper
@@ -77,6 +79,7 @@ from src.scraping.scrapers.welcometothejungle import WTTJScraper
 from src.scraping.scrapers.wellfound import WellfoundScraper
 from src.scraping.scrapers.weworkremotely import WeWorkRemotelyScraper
 from src.scraping.scrapers.workable import WorkableScraper
+from src.scraping.scrapers.workable_marketplace import WorkableMarketplaceScraper
 from src.scraping.scrapers.workday import WorkdayScraper
 from src.scraping.scrapers.ycombinator import YCombinatorScraper
 
@@ -109,6 +112,7 @@ __all__ = [
     "HrmosScraper",
     "InfoJobsSpainScraper",
     "JazzHRScraper",
+    "JibeScraper",
     "JobBankCAScraper",
     "JobsChScraper",
     "JobsCzScraper",
@@ -137,6 +141,7 @@ __all__ = [
     "SmartRecruitersScraper",
     "SoftgardenScraper",
     "SuccessFactorsScraper",
+    "TalentBrewScraper",
     "TaleoScraper",
     "TeamtailorScraper",
     "TeslaScraper",
@@ -149,6 +154,7 @@ __all__ = [
     "WantedScraper",
     "WeWorkRemotelyScraper",
     "WellfoundScraper",
+    "WorkableMarketplaceScraper",
     "WorkableScraper",
     "WorkdayScraper",
     "YCombinatorScraper",
