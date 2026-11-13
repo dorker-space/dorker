@@ -31,7 +31,7 @@ class ClassifyProfileToJob(Classifier[ApplicationPacket]):
 
         materials, questions = self._generate_request_questions(profile)
 
-        res = await self.client.system_one(state=full_state, questions=questions)
+        res = await self.client.system_one(state=full_state, questions=questions, extra_headers={"TypeSafe-Danger-Zone-Long-Context": "true"})
 
         return self._classify_local(job, materials, res)
 
