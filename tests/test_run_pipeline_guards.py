@@ -12,6 +12,11 @@ from src.scraping.exceptions import CompanyNotFoundError
 from src.scraping.models import ATSType, Job
 
 
+def test_seek_is_not_scheduled_for_pipeline_ingestion() -> None:
+    assert "seek" not in runner.CONFIGS
+    assert "jobbankca" in runner.CONFIGS
+
+
 def test_bamboohr_pipeline_fails_closed_on_empty() -> None:
     assert runner.CONFIGS["bamboohr"]["fail_closed_on_empty"] is True
 
@@ -84,6 +89,38 @@ def test_oracle_dedupes_same_tenant_job_across_named_sites() -> None:
         runner._job_dedupe_key(second, oracle_config)
     )
     assert runner._job_dedupe_key(first, {}) != runner._job_dedupe_key(second, {})
+
+
+def test_applitrack_keeps_same_content_under_distinct_provider_ids() -> None:
+    first = Job(
+        url="https://www.applitrack.com/dupage/onlineapp/JobPostings/view.asp?AppliTrackJobId=474_142",
+        title="Elementary Teacher",
+        company="Example School District",
+        location="Example Elementary School",
+        ats_type=ATSType.APPLITRACK,
+        ats_id="142:474",
+    )
+    second = first.model_copy(
+        update={
+            "url": "https://www.applitrack.com/dupage/onlineapp/JobPostings/view.asp?AppliTrackJobId=474_143",
+            "ats_id": "143:474",
+        }
+    )
+    repeated = first.model_copy(
+        update={
+            "url": "https://www.applitrack.com/roe24/onlineapp/JobPostings/view.asp?AppliTrackJobId=474_142",
+        }
+    )
+
+    config = runner.CONFIGS["applitrack"]
+    assert runner._job_dedupe_key(first, config) != (
+        runner._job_dedupe_key(second, config)
+    )
+    # A consortium board repeats a member district's posting under the
+    # same id: it is published once.
+    assert runner._job_dedupe_key(first, config) == (
+        runner._job_dedupe_key(repeated, config)
+    )
 
 
 def test_icims_dedupes_exact_job_url_across_named_portals() -> None:
@@ -235,6 +272,24 @@ def test_provider_slug_normalizers_match_current_company_csv_shape() -> None:
         "url": "",
     }
     assert runner._lever_slug(lever_slug_only_row) == "OpenPayd"
+    assert runner.CONFIGS["lever"]["kwargs"](lever_row) == {}
+    assert runner.CONFIGS["lever"]["kwargs"](lever_slug_only_row) == {}
+
+    # A board in Lever's EU region: same bare slug, and the region as a
+    # scraper argument.
+    lever_eu_row = {
+        "name": "Acme",
+        "slug": "https://jobs.eu.lever.co/Acme",
+        "url": "https://jobs.eu.lever.co/Acme",
+    }
+    assert runner._lever_slug(lever_eu_row) == "Acme"
+    assert runner.CONFIGS["lever"]["kwargs"](lever_eu_row) == {"region": "eu"}
+    # The region survives a row without a ``url``.
+    lever_eu_slug_only_row = {**lever_eu_row, "url": ""}
+    assert runner._lever_slug(lever_eu_slug_only_row) == "Acme"
+    assert runner.CONFIGS["lever"]["kwargs"](lever_eu_slug_only_row) == {
+        "region": "eu"
+    }
     assert runner.CONFIGS["oracle"]["kwargs"](oracle_row) == {
         "company_name": "ABM US"
     }
@@ -245,12 +300,26 @@ def test_lever_catalog_slugs_preserve_canonical_url_case() -> None:
         rows = list(csv.DictReader(handle))
 
     mismatches = []
+    boards = []
     for row in rows:
-        canonical = unquote(urlparse(row["url"]).path.strip("/").split("/", 1)[0])
-        if row["slug"] != canonical:
-            mismatches.append((row["slug"], canonical, row["url"]))
+        parsed = urlparse(row["url"])
+        canonical = unquote(parsed.path.strip("/").split("/", 1)[0])
+        boards.append(canonical.casefold())
+        # ``slug`` is what ``get_scraper("lever", slug)`` is given. A bare
+        # slug is read from the US API, so a board in the EU region
+        # carries its board URL.
+        expected = (
+            f"https://jobs.eu.lever.co/{canonical}"
+            if parsed.hostname == "jobs.eu.lever.co"
+            else canonical
+        )
+        if row["slug"] != expected:
+            mismatches.append((row["slug"], expected, row["url"]))
 
     assert mismatches == []
+    # The pipeline keys a row's display name by its bare board slug, so a
+    # slug is listed once, in one region.
+    assert len(set(boards)) == len(boards)
     assert runner.CONFIGS["oracle"]["dedupe_by_ats_id"] is True
 
     cornerstone_row = {

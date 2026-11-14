@@ -11,6 +11,8 @@ kept outside the public scraper API so each scraper stays usable on its own.
 from src.scraping.scrapers.adp import ADPWorkforceNowScraper
 from src.scraping.scrapers.amazon import AmazonScraper
 from src.scraping.scrapers.apple import AppleScraper
+from src.scraping.scrapers.applicantpro import ApplicantProScraper
+from src.scraping.scrapers.applitrack import AppliTrackScraper
 from src.scraping.scrapers.arbetsformedlingen import ArbetsformedlingenScraper
 from src.scraping.scrapers.ashby import AshbyScraper
 from src.scraping.scrapers.avature import AvatureScraper
@@ -22,6 +24,8 @@ from src.scraping.scrapers.breezy import BreezyScraper
 from src.scraping.scrapers.builtin import BuiltInScraper
 from src.scraping.scrapers.bundesagentur import BundesagenturScraper
 from src.scraping.scrapers.bytedance import BytedanceScraper
+from src.scraping.scrapers.catsone import CatsOneScraper
+from src.scraping.scrapers.clearcompany import ClearCompanyScraper
 from src.scraping.scrapers.cornerstone import CornerstoneScraper
 from src.scraping.scrapers.darwinbox import DarwinboxScraper
 from src.scraping.scrapers.dayforce import DayforceScraper
@@ -33,6 +37,7 @@ from src.scraping.scrapers.google import GoogleScraper
 from src.scraping.scrapers.greenhouse import GreenhouseScraper
 from src.scraping.scrapers.gupy import GupyScraper
 from src.scraping.scrapers.herp import HerpScraper
+from src.scraping.scrapers.hireology import HireologyScraper
 from src.scraping.scrapers.hrmos import HrmosScraper
 from src.scraping.scrapers.icims import iCIMSScraper
 from src.scraping.scrapers.infojobs_es import InfoJobsSpainScraper
@@ -49,10 +54,12 @@ from src.scraping.scrapers.manfred import ManfredScraper
 from src.scraping.scrapers.mercor import MercorScraper
 from src.scraping.scrapers.meta import MetaScraper
 from src.scraping.scrapers.moka import MokaScraper
+from src.scraping.scrapers.ninehire import NinehireScraper
 from src.scraping.scrapers.oracle import OracleScraper
 from src.scraping.scrapers.pageup import PageUpScraper
 from src.scraping.scrapers.paycom import PaycomScraper
 from src.scraping.scrapers.paylocity import PaylocityScraper
+from src.scraping.scrapers.peopleadmin import PeopleAdminScraper
 from src.scraping.scrapers.personio import PersonioScraper
 from src.scraping.scrapers.phenom import PhenomScraper
 from src.scraping.scrapers.pinpoint import PinpointScraper
@@ -66,7 +73,10 @@ from src.scraping.scrapers.smartrecruiters import SmartRecruitersScraper
 from src.scraping.scrapers.softgarden import SoftgardenScraper
 from src.scraping.scrapers.successfactors import SuccessFactorsScraper
 from src.scraping.scrapers.talentbrew import TalentBrewScraper
+from src.scraping.scrapers.talentio import TalentioScraper
+from src.scraping.scrapers.talentsoft import TalentsoftScraper
 from src.scraping.scrapers.taleo import TaleoScraper
+from src.scraping.scrapers.taleo_enterprise import TaleoEnterpriseScraper
 from src.scraping.scrapers.teamtailor import TeamtailorScraper
 from src.scraping.scrapers.tesla import TeslaScraper
 from src.scraping.scrapers.thehub import TheHubScraper
@@ -74,10 +84,13 @@ from src.scraping.scrapers.tiktok import TikTokScraper
 from src.scraping.scrapers.uber import UberScraper
 from src.scraping.scrapers.ukg import UKGProScraper
 from src.scraping.scrapers.usajobs import USAJobsScraper
+from src.scraping.scrapers.varbi import VarbiScraper
 from src.scraping.scrapers.wanted import WantedScraper
+from src.scraping.scrapers.wantedly import WantedlyScraper
 from src.scraping.scrapers.welcometothejungle import WTTJScraper
 from src.scraping.scrapers.wellfound import WellfoundScraper
 from src.scraping.scrapers.weworkremotely import WeWorkRemotelyScraper
+from src.scraping.scrapers.wintalent import WinTalentScraper
 from src.scraping.scrapers.workable import WorkableScraper
 from src.scraping.scrapers.workable_marketplace import WorkableMarketplaceScraper
 from src.scraping.scrapers.workday import WorkdayScraper
@@ -87,6 +100,8 @@ __all__ = [
     "ADPWorkforceNowScraper",
     "AmazonScraper",
     "AppleScraper",
+    "AppliTrackScraper",
+    "ApplicantProScraper",
     "ArbetsformedlingenScraper",
     "AshbyScraper",
     "AvatureScraper",
@@ -98,6 +113,8 @@ __all__ = [
     "BuiltInScraper",
     "BundesagenturScraper",
     "BytedanceScraper",
+    "CatsOneScraper",
+    "ClearCompanyScraper",
     "CornerstoneScraper",
     "DarwinboxScraper",
     "DayforceScraper",
@@ -109,6 +126,7 @@ __all__ = [
     "GreenhouseScraper",
     "GupyScraper",
     "HerpScraper",
+    "HireologyScraper",
     "HrmosScraper",
     "InfoJobsSpainScraper",
     "JazzHRScraper",
@@ -124,10 +142,12 @@ __all__ = [
     "MercorScraper",
     "MetaScraper",
     "MokaScraper",
+    "NinehireScraper",
     "OracleScraper",
     "PageUpScraper",
     "PaycomScraper",
     "PaylocityScraper",
+    "PeopleAdminScraper",
     "PersonioScraper",
     "PhenomScraper",
     "PinpointScraper",
@@ -142,6 +162,9 @@ __all__ = [
     "SoftgardenScraper",
     "SuccessFactorsScraper",
     "TalentBrewScraper",
+    "TalentioScraper",
+    "TalentsoftScraper",
+    "TaleoEnterpriseScraper",
     "TaleoScraper",
     "TeamtailorScraper",
     "TeslaScraper",
@@ -150,10 +173,13 @@ __all__ = [
     "UKGProScraper",
     "USAJobsScraper",
     "UberScraper",
+    "VarbiScraper",
     "WTTJScraper",
     "WantedScraper",
+    "WantedlyScraper",
     "WeWorkRemotelyScraper",
     "WellfoundScraper",
+    "WinTalentScraper",
     "WorkableMarketplaceScraper",
     "WorkableScraper",
     "WorkdayScraper",

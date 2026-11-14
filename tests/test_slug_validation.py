@@ -12,6 +12,7 @@ import pytest
 
 from src.scraping.exceptions import ScraperError
 from src.scraping.scrapers import (
+    ApplicantProScraper,
     AvatureScraper,
     BambooHRScraper,
     BreezyScraper,
@@ -27,6 +28,7 @@ from src.scraping.scrapers import (
 from src.scraping.scrapers._slug import require_host_label, require_http_url
 
 BARE_SLUG_SCRAPERS = [
+    ApplicantProScraper,
     TeamtailorScraper,
     BreezyScraper,
     BambooHRScraper,

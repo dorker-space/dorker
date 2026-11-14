@@ -17,25 +17,31 @@ from src.scraping.models import ATSType, Company, Job, Salary
 def test_ats_type_includes_every_supported_platform() -> None:
     expected = {
         # Multi-tenant ATS systems
-        "adp", "ashby", "avature", "beisen", "beisen_legacy", "cornerstone",
+        "adp", "applitrack", "ashby", "avature", "beisen", "beisen_legacy", "catsone",
+        "clearcompany", "cornerstone",
         "darwinbox", "dayforce", "eightfold", "gem", "greenhouse", "gupy", "herp", "hrmos",
+        "hireology",
         "icims", "jibe", "join_com", "jobvite", "keka", "lever", "mercor", "moka", "oracle", "pageup", "paycom", "paylocity",
-        "personio", "phenom",
+        "peopleadmin", "personio", "phenom",
+        "applicantpro",
         "pinpoint", "recruiterbox", "rippling", "smartrecruiters", "softgarden",
-        "successfactors", "ukg", "workable", "workable_marketplace", "workday",
+        "successfactors", "talentio", "ukg", "workable", "workable_marketplace", "workday",
+        "wintalent",
         # Big-tech custom careers systems
         "amazon", "apple", "bytedance", "google", "meta",
         "tesla", "tiktok", "uber", "usajobs",
         # National / supranational public-sector aggregators
         "bundesagentur", "arbetsformedlingen", "eures",
         # Hybrid jobboards (companies post directly)
-        "welcometothejungle", "getonbrd", "wanted", "remoteok",
+        "welcometothejungle", "getonbrd", "wanted", "wantedly", "remoteok",
         "weworkremotely", "programathor", "builtin", "jobsch",
         "jobs_cz", "manfred", "thehub", "ycombinator", "wellfound",
         "infojobs_es", "jobbankca", "seek",
         # Additional multi-tenant ATSes
+        "ninehire",
         "bamboohr", "breezy", "jazzhr",
-        "recruitee", "talentbrew", "taleo", "teamtailor",
+        "recruitee", "talentbrew", "talentsoft", "taleo", "taleo_enterprise", "teamtailor",
+        "varbi",
         # Catch-all
         "custom",
     }
