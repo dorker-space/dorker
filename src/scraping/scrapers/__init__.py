@@ -21,6 +21,7 @@ from src.scraping.scrapers.base import BaseScraper, ScraperRegistry, get_scraper
 from src.scraping.scrapers.beisen import BeisenScraper
 from src.scraping.scrapers.beisen_legacy import BeisenLegacyScraper
 from src.scraping.scrapers.breezy import BreezyScraper
+from src.scraping.scrapers.brightermonday import BrighterMondayScraper
 from src.scraping.scrapers.builtin import BuiltInScraper
 from src.scraping.scrapers.bundesagentur import BundesagenturScraper
 from src.scraping.scrapers.bytedance import BytedanceScraper
@@ -30,11 +31,14 @@ from src.scraping.scrapers.cornerstone import CornerstoneScraper
 from src.scraping.scrapers.darwinbox import DarwinboxScraper
 from src.scraping.scrapers.dayforce import DayforceScraper
 from src.scraping.scrapers.eightfold import EightfoldScraper
+from src.scraping.scrapers.emploitic import EmploiticScraper
 from src.scraping.scrapers.eures import EuresScraper
+from src.scraping.scrapers.feishu_hire import FeishuHireScraper
 from src.scraping.scrapers.gem import GemScraper
 from src.scraping.scrapers.getonbrd import GetOnBrdScraper
 from src.scraping.scrapers.google import GoogleScraper
 from src.scraping.scrapers.greenhouse import GreenhouseScraper
+from src.scraping.scrapers.greeting import GreetingScraper
 from src.scraping.scrapers.gupy import GupyScraper
 from src.scraping.scrapers.herp import HerpScraper
 from src.scraping.scrapers.hireology import HireologyScraper
@@ -42,18 +46,22 @@ from src.scraping.scrapers.hrmos import HrmosScraper
 from src.scraping.scrapers.icims import iCIMSScraper
 from src.scraping.scrapers.infojobs_es import InfoJobsSpainScraper
 from src.scraping.scrapers.jazzhr import JazzHRScraper
+from src.scraping.scrapers.jd import JDScraper
 from src.scraping.scrapers.jibe import JibeScraper
 from src.scraping.scrapers.jobbankca import JobBankCAScraper
+from src.scraping.scrapers.jobberman import JobbermanScraper
 from src.scraping.scrapers.jobs_cz import JobsCzScraper
 from src.scraping.scrapers.jobsch import JobsChScraper
 from src.scraping.scrapers.jobvite import JobviteScraper
 from src.scraping.scrapers.join_com import JoinComScraper
 from src.scraping.scrapers.keka import KekaScraper
 from src.scraping.scrapers.lever import LeverScraper
+from src.scraping.scrapers.manatal import ManatalScraper
 from src.scraping.scrapers.manfred import ManfredScraper
 from src.scraping.scrapers.mercor import MercorScraper
 from src.scraping.scrapers.meta import MetaScraper
 from src.scraping.scrapers.moka import MokaScraper
+from src.scraping.scrapers.mycareersfuture import MyCareersFutureScraper
 from src.scraping.scrapers.ninehire import NinehireScraper
 from src.scraping.scrapers.oracle import OracleScraper
 from src.scraping.scrapers.pageup import PageUpScraper
@@ -95,6 +103,7 @@ from src.scraping.scrapers.workable import WorkableScraper
 from src.scraping.scrapers.workable_marketplace import WorkableMarketplaceScraper
 from src.scraping.scrapers.workday import WorkdayScraper
 from src.scraping.scrapers.ycombinator import YCombinatorScraper
+from src.scraping.scrapers.zoho_recruit import ZohoRecruitScraper
 
 __all__ = [
     "ADPWorkforceNowScraper",
@@ -110,6 +119,7 @@ __all__ = [
     "BeisenLegacyScraper",
     "BeisenScraper",
     "BreezyScraper",
+    "BrighterMondayScraper",
     "BuiltInScraper",
     "BundesagenturScraper",
     "BytedanceScraper",
@@ -119,29 +129,36 @@ __all__ = [
     "DarwinboxScraper",
     "DayforceScraper",
     "EightfoldScraper",
+    "EmploiticScraper",
     "EuresScraper",
+    "FeishuHireScraper",
     "GemScraper",
     "GetOnBrdScraper",
     "GoogleScraper",
     "GreenhouseScraper",
+    "GreetingScraper",
     "GupyScraper",
     "HerpScraper",
     "HireologyScraper",
     "HrmosScraper",
     "InfoJobsSpainScraper",
+    "JDScraper",
     "JazzHRScraper",
     "JibeScraper",
     "JobBankCAScraper",
+    "JobbermanScraper",
     "JobsChScraper",
     "JobsCzScraper",
     "JobviteScraper",
     "JoinComScraper",
     "KekaScraper",
     "LeverScraper",
+    "ManatalScraper",
     "ManfredScraper",
     "MercorScraper",
     "MetaScraper",
     "MokaScraper",
+    "MyCareersFutureScraper",
     "NinehireScraper",
     "OracleScraper",
     "PageUpScraper",
@@ -184,6 +201,7 @@ __all__ = [
     "WorkableScraper",
     "WorkdayScraper",
     "YCombinatorScraper",
+    "ZohoRecruitScraper",
     "get_scraper",
     "iCIMSScraper",
 ]
